@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HSRS F1 Liga Jelentkezés</title>
+
+<style>
+body{
+    font-family: Arial, sans-serif;
+    background:#1e1f22;
+    color:white;
+    margin:0;
+    padding:30px;
+}
+
+.container{
+    max-width:800px;
+    margin:auto;
+    background:#2b2d31;
+    padding:30px;
+    border-radius:15px;
+    box-shadow:0 0 20px rgba(0,0,0,0.4);
+}
+
+h1{
+    text-align:center;
+    color:#ff1801;
+}
+
+h2{
+    border-bottom:2px solid #ff1801;
+    padding-bottom:5px;
+}
+
+label{
+    display:block;
+    margin-top:15px;
+    font-weight:bold;
+}
+
+input,
+textarea,
+select{
+    width:100%;
+    padding:10px;
+    margin-top:5px;
+    border:none;
+    border-radius:8px;
+    background:#404249;
+    color:white;
+    box-sizing:border-box;
+}
+
+textarea{
+    resize:vertical;
+    min-height:120px;
+}
+
+.checkbox-group{
+    margin-top:10px;
+}
+
+.checkbox-group label{
+    font-weight:normal;
+}
+
+button{
+    width:100%;
+    margin-top:25px;
+    padding:15px;
+    border:none;
+    border-radius:10px;
+    background:#ff1801;
+    color:white;
+    font-size:18px;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#d91400;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>🏁 HSRS F1 Liga Jelentkezés</h1>
+
+<form id="jelentkezesForm">
+
+<h2>Személyes adatok</h2>
+
+<label>Név vagy keresztnév</label>
+<input type="text" id="nev" required>
+
+<label>Versenyzői név</label>
+<input type="text" id="versenyzonev" required>
+
+<label>Életkor</label>
+<input type="number" id="kor" min="10" max="99">
+
+<label>Ország</label>
+<input type="text" id="orszag">
+
+<h2>Játékadatok</h2>
+
+<label>Platform</label>
+<select id="platform">
+    <option>PC</option>
+    <option>PlayStation</option>
+    <option>Xbox</option>
+</select>
+
+<label>F1 játék verzió</label>
+<input type="text" id="jatek" placeholder="Pl. F1 25">
+
+<label>Irányítóeszköz</label>
+<select id="iranyito">
+    <option>Kormány</option>
+    <option>Kontroller</option>
+</select>
+
+<h2>Tapasztalat</h2>
+
+<label>Voltál már F1 ligában?</label>
+<select id="liga">
+    <option>Igen</option>
+    <option>Nem</option>
+</select>
+
+<label>Ha igen, melyikben?</label>
+<input type="text" id="melyikliga">
+
+<label>Gyorsaságod (1-10)</label>
+<input type="number" id="gyorsasag" min="1" max="10">
+
+<h2>Elérhetőség</h2>
+
+<label>Discord felhasználónév</label>
+<input type="text" id="discord" required>
+
+<label>Részt tudsz venni a futamok többségén?</label>
+<select id="aktiv">
+    <option>Igen</option>
+    <option>Nem</option>
+</select>
+
+<h2>Miért szeretnél csatlakozni?</h2>
+
+<textarea id="miert"></textarea>
+
+<h2>Nyilatkozat</h2>
+
+<div class="checkbox-group">
+    <label><input type="checkbox" required> Elfogadom a HSRS szabályzatát.</label>
+    <label><input type="checkbox" required> Sportszerűen fogok versenyezni.</label>
+    <label><input type="checkbox" required> Tudomásul veszem a büntetési rendszert.</label>
+</div>
+
+<button type="submit">🏁 Jelentkezés Beküldése</button>
+
+</form>
+
+</div>
+
+<script>
+document.getElementById("jelentkezesForm").addEventListener("submit", async function(e) {
+    e.preventDefault();
+
+    const webhook = "https://discord.com/api/webhooks/1508522249542434929/lF_yiBbkIEIVKHNo6XBHt0GkiM5uCRMeyI5nJViZc8gK4_L5EJ4ROrUxsszVmb222wWY";
+
+    const data = {
+        content:
+`🏁 ÚJ HSRS JELENTKEZÉS 🏁
+
+━━━━━━━━━━━━━━━━━━
+👤 SZEMÉLYES ADATOK
+━━━━━━━━━━━━━━━━━━
+
+🧑 Név: ${document.getElementById("nev").value}
+🏎️ Versenyzői név: ${document.getElementById("versenyzonev").value}
+🎂 Kor: ${document.getElementById("kor").value}
+🌍 Ország: ${document.getElementById("orszag").value}
+
+━━━━━━━━━━━━━━━━━━
+🎮 JÁTÉKADATOK
+━━━━━━━━━━━━━━━━━━
+
+💻 Platform: ${document.getElementById("platform").value}
+🎯 F1 Verzió: ${document.getElementById("jatek").value}
+🎮 Irányító: ${document.getElementById("iranyito").value}
+
+━━━━━━━━━━━━━━━━━━
+🏁 TAPASZTALAT
+━━━━━━━━━━━━━━━━━━
+
+📋 Volt ligában: ${document.getElementById("liga").value}
+🏆 Melyik liga: ${document.getElementById("melyikliga").value}
+⚡ Gyorsaság: ${document.getElementById("gyorsasag").value}/10
+
+━━━━━━━━━━━━━━━━━━
+📞 ELÉRHETŐSÉG
+━━━━━━━━━━━━━━━━━━
+
+💬 Discord: ${document.getElementById("discord").value}
+📅 Aktív futamokon: ${document.getElementById("aktiv").value}
+
+━━━━━━━━━━━━━━━━━━
+📝 MIÉRT CSATLAKOZNA?
+━━━━━━━━━━━━━━━━━━
+
+${document.getElementById("miert").value}
+
+━━━━━━━━━━━━━━━━━━
+✅ Jelentkezés elküldve
+━━━━━━━━━━━━━━━━━━`
+    };
+
+    fetch(webhook + "?wait=true", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => {
+        if(response.ok){
+            alert("Sikeresen elküldve Discordra!");
+            document.getElementById("jelentkezesForm").reset();
+        } else {
+            alert("Hiba történt küldés közben!");
+        }
+    })
+    .catch(error => {
+        console.error(error);
+        alert("Nem sikerült elküldeni!");
+    });
+});
+</script>
+
+</body>
+</html>
